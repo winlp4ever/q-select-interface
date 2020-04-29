@@ -1,0 +1,8 @@
+node_modules
+articles
+data
+aws-credentials/*
+**/__pycache__
+db-credentials
+nlp/**/*.ipynb
+azure-credentials/*

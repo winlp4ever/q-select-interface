@@ -1,0 +1,47 @@
+.q-select {
+    position: relative;
+    top: 2em;
+    .question {
+        width: 60%;
+        margin: auto;
+        box-sizing: border-box;
+        padding: 0.25em 0.6em;
+        font-weight: 600;
+        color: #424242;
+        border: 1px solid lightgrey;
+        border-radius: 0.1em;
+        &.invalid {
+            background: #ef9a9a;
+        }
+        button {
+            background: none;
+            border: none;
+            outline: none;
+            i {
+                font-size: 1.2em;
+            }
+        }
+    }
+    .forward-backward {
+        position: fixed;
+        bottom: 0.5em;
+        right: 50%;
+        width: 100px;
+        margin-right: -50px;
+        button {
+            border: none;
+            outline: none;
+            background: none;
+            font: {
+                size: 1.5em;
+                weight: 700;
+            }
+        }
+        span {
+            text-align: center;
+            vertical-align: middle;
+            width: 25px;
+            display: inline-block;
+        }
+    }
+}
