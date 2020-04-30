@@ -29,7 +29,7 @@ if (process.argv[2] != 'prod' & process.argv[2] != 'dev') {
 mode = process.argv[2];
 if (mode == 'prod') {
     compiler = webpack(prodConfig);
-    PORT = 80;
+    PORT = 5000;
 }
 else compiler = webpack(devConfig);
 
@@ -89,8 +89,8 @@ app.post('/post-questions', (req, res) => {
     client.query(query, values, (err, response) => {
         if (err) {
             res.json({status: err.stack});
+            console.log(err.stack);
         } else {
-            console.log(response);
             res.json({questions: response.rows});
         }
     })

@@ -58,7 +58,6 @@ export default class App extends Component {
             range: this.state.range+1,
             questions: data.questions
         });
-        console.log('oof');
     }
     previousQuestions = async () => {
         if (this.state.range > 0) {
