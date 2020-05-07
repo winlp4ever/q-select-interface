@@ -91,7 +91,7 @@ export default class App extends Component {
         let data = await response.json();
         if (data.status == 'ok') {
             let qs = this.state.questions.slice();
-            qs[ix].question_valid = 0;
+            qs[ix].question_fuzzy = 1;
             this.setState({questions: qs});
         }
         
@@ -110,7 +110,7 @@ export default class App extends Component {
         let data = await response.json();
         if (data.status == 'ok') {
             let qs = this.state.questions.slice();
-            qs[ix].question_valid = 1;
+            qs[ix].question_fuzzy=0;
             this.setState({questions: qs})
         }
     }
@@ -119,9 +119,9 @@ export default class App extends Component {
         return (
             <div className='q-select'>
                 {this.state.questions.map((q, ix) => {
-                    return <div className={'question' + (q.question_valid==1? '': ' invalid')} key={q.id}>
+                    return <div className={'question' + (q.question_fuzzy==0? '': ' invalid')} key={q.id}>
                         <span>{q.question_text}</span>
-                        {q.question_valid? <button onClick={_ => this.isInvalid(ix, q.id)}>
+                        {!q.question_fuzzy? <button onClick={_ => this.isInvalid(ix, q.id)}>
                             <i className="fas fa-thumbs-up"></i>
                         </button>
                         : <button onClick={_ => this.isValid(ix, q.id)}>

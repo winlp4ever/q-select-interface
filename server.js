@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 const prodConfig = require('./webpack.prod.js');
 const devConfig = require('./webpack.dev.js');
 const options = {};
-var PORT = 5000;
+var PORT = 5600;
 
 var mode = 'prod';
 if (process.argv.length < 3) mode = 'prod';
@@ -84,7 +84,11 @@ app.get('*', (req, res, next) => {
 });
 
 app.post('/post-questions', (req, res) => {
-    const query = 'select id, question_text, question_valid from question order by id asc limit 10 offset $1;';
+    const query = `
+    select id, question_text, question_fuzzy
+    from distinct_question where question_valid=1 
+    order by id asc limit 10 offset $1;
+    `;
     const values = [req.body.range*10];
     client.query(query, values, (err, response) => {
         if (err) {
@@ -97,7 +101,7 @@ app.post('/post-questions', (req, res) => {
 })
 
 app.post('/validate-question', (req, res) => {
-    const query = 'update question set question_valid=1 where id=$1;';
+    const query = 'update question set question_fuzzy=0 where id=$1;';
     const values = [req.body.qid];
     client.query(query, values, (err, response) => {
         if (err) {
@@ -109,7 +113,7 @@ app.post('/validate-question', (req, res) => {
 })
 
 app.post('/invalidate-question', (req, res) => {
-    const query = 'update question set question_valid=0 where id=$1;';
+    const query = 'update question set question_fuzzy=1 where id=$1;';
     const values = [req.body.qid];
     client.query(query, values, (err, response) => {
         if (err) {
