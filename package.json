@@ -44,7 +44,7 @@
     "@uifabric/fabric-website": "^7.9.6",
     "@uifabric/fluent-theme": "^7.1.25",
     "aws-sdk": "^2.647.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "cli-progress": "^3.6.0",
     "collections": "^5.1.9",
